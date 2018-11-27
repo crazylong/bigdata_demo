@@ -147,5 +147,42 @@ class chapter3 {
     //要点：拿到所有下标好过逐个处理
   }
 
+  /**
+    * 与java互操作
+    */
+  @Test
+  def correlateJava(): Unit ={
+    val a = Array("Mary", "a", "had", "lamb", "little")
+    //这样行不通
+    //因为Scala不会将Array[String]转换为Array[Object]
+    //java.util.Arrays.binarySearch(a, "beef")
+    //可以像这样强制转换
+    var position =java.util.Arrays.binarySearch(a.asInstanceOf[Array[Object]], "a")
+    println(position)
+
+    //直接用Scala二分查找
+    import scala.collection.Searching._
+    val result = a.search("beef")
+    println(result)
+    println(a.search("a"))
+
+    //如果你调用接受或返回java.util.List的java方法，当然可以在Scala代码中使用java的ArrayList
+    //但那样做没什么意思。你完全可以引入scala.collection.JavaConversions里的隐式转换方法。
+    //这样你就可以在代码中使用scala缓冲，在调用Java方法是，这些对象会被自动包装成java列表
+    //举例来说，java.util.ProcessBuilder类有一个以List<String>为参数的构造函数。
+    //以下是在Scala中调用它的写法：
+    import scala.collection.JavaConversions.bufferAsJavaList
+    import scala.collection.mutable.ArrayBuffer
+    val command = ArrayBuffer("ls", "-al", "/home/cay")
+    val pb = new ProcessBuilder(command)//Scala到Java的转换,Scala缓冲被包装成了一个实现了java.util.List接口的Java类的对象
+
+
+    //反过来讲，当java方法返回java.util.List时，我们可以让它自动转换成一个Buffer:
+    import scala.collection.JavaConversions.asScalaBuffer
+    import scala.collection.mutable.Buffer
+    val cmd: Buffer[String] = pb.command()//Java到Scala的转换
+    //不能使用ArrayBuffer--包装起来的对象仅能保证是一个Buffer
+  }
+
 
 }
