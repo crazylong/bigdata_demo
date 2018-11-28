@@ -185,4 +185,106 @@ class chapter3 {
   }
 
 
+  //================================练 习==========================
+
+  /**
+    * 将a设置为一个n个随机整数的数组，要求随机数介于0（包含）和n（不包含）之间
+    * @param n
+    */
+  def exercises1(n : Int): Unit ={
+    val a = new Array[Int](n)
+    for(i <- 0 until n)
+      a(i) = (new util.Random).nextInt(n)
+    println(a.mkString(","))
+  }
+
+  @Test
+  def testExercises1(): Unit ={
+    exercises1(1)
+  }
+
+  /**
+    * 编写一个循环，将整数数组中相邻的元素置换
+    */
+  @Test
+  def exercises2(): Unit ={
+    val a = Array(1, 2, 3, 4, 5, 6, 7)
+    val b = new Array[Int](a.size)
+    var temp : Int = 0
+    for(i <- 1 until a.size by 2){
+      b(i-1) = a(i)
+      b(i) = a(i-1)
+      println(i)
+      if(a.size % 2 == 1 && i==a.size-2)
+        b(a.size-1)=a(a.size-1)
+    }
+    println(b.mkString(","))
+  }
+
+  def swapArray(a: Array[Int]) ={
+    for(i <- 0 until a.size)
+      yield
+        if(i%2==0)
+          if(i == a.size - 1)
+            a(i)
+          else
+            a(i+1)
+        else
+          a(i-1)
+  }
+
+  @Test
+  def testSwapArray(): Unit ={
+    val a = Array(1, 2, 3, 4, 5, 6, 7)
+    println(swapArray(a).mkString(","))
+  }
+
+
+  @Test
+  def exercises4(): Unit ={
+    val arr = Array(1, -1, 2, 3, -5, 4, 8, -10, -9)
+    var b = new ArrayBuffer[Int]()
+    var c = new ArrayBuffer[Int]()
+    for(a <- arr){
+      if(a > 0)
+        b.append(a)
+      else
+        c.append(a)
+    }
+    b.appendAll(c)
+    println(b.mkString(","))
+  }
+
+  def positiveNegative(a: Array[Int])={
+    a.filter(_ > 0) ++ a.filter(_ < 0)
+  }
+
+  @Test
+  def testPositiveNegative(): Unit ={
+    val test = Array(10, 7, -5, 11, -44, 0, 22, -22, -100, 77, -5)
+    val res = positiveNegative(test)
+    println(res.mkString(","))
+  }
+
+  def calArrayAvg(a: Array[Double]): Double={
+    a.sum/a.size
+  }
+
+  @Test
+  def testCalArrayAvg(): Unit ={
+    val test = Array[Double](10, 7, -5, 11, -44, 0, 22, -22, -100, 77, -5)
+    val res = calArrayAvg(test)
+    println(res)
+  }
+
+  @Test
+  def reverse(): Unit ={
+    val test = Array(10, 7, -5, 11, -44, 0, 22, -22, -100, 77, -5)
+    println(test.reverse.mkString(","))
+
+    val test2 = ArrayBuffer(10, 7, -5, 11, -44, 0, 22, -22, -100, 77, -5)
+    println(test2.reverse.mkString(","))
+  }
+
+
 }
