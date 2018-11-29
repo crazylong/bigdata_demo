@@ -148,6 +148,38 @@ class chapter3 {
   }
 
   /**
+    * 常用算法
+    */
+  @Test
+  def testAlgs(): Unit ={
+    println("===============sum===============")
+    println(Array(1, 7, 2, 9).sum)
+    println("===============max===============")
+    println(ArrayBuffer("Mary", "had", "a", "little", "littla","littlaa","lamb").max)
+
+    println("===============sorted===============")
+    val b = Array(1, 7, 2, 9)
+    val bSorted = b.sorted
+    bSorted.foreach(println(_))
+
+    println("===============descending===============")
+    val bDescending = b.sortWith(_ > _)
+    bDescending.foreach(println(_))
+
+    println("===============quickSort===============")
+    //可以直接对一个数组排序，但不能对数组缓冲排序
+    val a = Array(1, 7, 2, 9)
+    scala.util.Sorting.quickSort(a)
+    a.foreach(println(_))
+    println(a.mkString(","))
+    println(a.mkString("<", ",", ">"))
+    println(a.toString)
+
+    val c = ArrayBuffer(1, 7, 2, 9)
+    println(c.toString())
+  }
+
+  /**
     * 与java互操作
     */
   @Test
