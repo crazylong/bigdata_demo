@@ -76,6 +76,79 @@ class chapter4 {
 //    scores3("Lily") = 30
 //    println(scores3("Lily"))
 
-    //你可能会觉得这样不停地创建新映射效率很低
+    //你可能会觉得这样不停地创建新映射效率很低，不过事实并非如此。
+    //老的和新的映射共享大部分结构。（这样做之所以可行，是因为它们是不可变的。）
+  }
+
+  @Test
+  def testIterable(): Unit ={
+    val scores = Map("Alice" -> 10, "Bob" -> 3, "Cindy" -> 5, "Lily" -> 5)
+    for((k,v) <- scores)
+      println(k + ":" + v)
+
+    for(k <- scores.keySet)
+      println(k)
+
+    for(k <- scores.keys)
+      println(k)
+
+    for(v <- scores.values)
+      println(v)
+
+    val newMap =for((k, v) <- scores)
+      yield (v, k)
+    println(newMap)
+  }
+
+  /**
+    * 映射有两种常见的实现策略：哈希表和平衡树。
+    * 哈希表使用键的哈希码来划定位置，因此遍历会以一种不可预期的顺序交出元素。
+    * 默认而言，Scala给你的是基于哈希表的映射，因为它通常更高效。
+    * 如果需要按照顺序依次访问映射中的键，可以使用SortedMap
+    */
+  @Test
+  def testSortedMap(): Unit ={
+    //哈希码排序
+    val scores1 = scala.collection.mutable.Map("Alice" -> 10, "Fred" -> 7, "Bob" -> 3, "Cindy" -> 8)
+    println(scores1)
+
+    //根据键排序
+    val scores2 = scala.collection.mutable.SortedMap("Alice" -> 10, "Fred" -> 7, "Bob" -> 3, "Cindy" -> 8)
+    println(scores2)
+
+    //根据插入顺序排序
+    val scores3 = scala.collection.mutable.LinkedHashMap("Alice" -> 10, "Fred" -> 7, "Bob" -> 3, "Cindy" -> 8)
+    println(scores3)
+  }
+
+  /**
+    * 与java互操作
+    */
+  @Test
+  def correlateJava(): Unit ={
+    //java to scala
+    var javaMap = new java.util.TreeMap[String, Int]()
+    javaMap.put("Alice", 10)
+    javaMap.put("Fred", 7)
+    javaMap.put("Bob", 3)
+    javaMap.put("Cindy", 8)
+    println(javaMap)
+
+    import scala.collection.JavaConversions.mapAsScalaMap
+    val scalaMap : scala.collection.mutable.Map[String, Int] = javaMap
+    println(scalaMap)
+
+    import scala.collection.JavaConversions.propertiesAsScalaMap
+    val props: scala.collection.Map[String, String] = System.getProperties
+    //println(props)
+
+
+    //scala to java
+    import scala.collection.JavaConversions.mapAsJavaMap
+    import java.awt.font.TextAttribute._
+    val attrs = Map(FAMILY -> "Serif", SIZE -> 12) //Scala映射
+    val font = new java.awt.Font(attrs) //scala to java
+    println(attrs)
+    println(font)
   }
 }
