@@ -44,4 +44,38 @@ class chapter4 {
     val bobScores = scores.get("Bob")
     println(bobScores)
   }
+
+  @Test
+  def testMapUpdate(): Unit ={
+    val scores = Map("Alice" -> 10, "Bob" -> 3, "Cindy" -> 5)
+    val scores2 = scala.collection.mutable.Map("Alice" -> 10, "Bob" -> 3, "Cindy" -> 5)
+
+    //不可变集合不能修改值
+    //    scores("Bob") = 10
+    //    println(scores("Bob"))
+    scores2("Bob") = 10
+    println(scores2("Bob"))
+
+    scores2("Fred") = 7
+    println(scores2("Fred"))
+
+    scores2+=("Lily" -> 10, "Dove" -> 20)
+    scores2 -= "Bob"
+
+    //newScores映射包含了与scores相同的映射关系；此外，"bob"被更新，"Fred"被添加进来
+    val newScores = scores + ("Bob" -> 10, "Dove" -> 20)
+
+    //除了把结果作为新值保存，还可以更新var变量:
+    var scores3 = Map("Alice" -> 10, "Bob" -> 3, "Cindy" -> 5)
+    scores3 = scores3 + ("Bob" -> 10, "Dove" -> 20)
+    scores3 += ("Lily" -> 10)
+    println(scores3("Lily"))
+    println(scores3)
+    scores3 -= "Lily"
+    //var 可以追加元素，但不能直接修改
+//    scores3("Lily") = 30
+//    println(scores3("Lily"))
+
+    //你可能会觉得这样不停地创建新映射效率很低
+  }
 }
