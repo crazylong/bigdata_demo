@@ -8,7 +8,7 @@ package impatient.chapter6
   * @create 2018/12/3
   */
 class Account(val id: Int, initialBalance: Double) {
- val id= Account.newUniqueNumber()
+ //val id= Account.newUniqueNumber()
   private var balance = 0.0
   def deposit(amount: Double){balance += amount}
 }
@@ -27,7 +27,8 @@ object Account{
   //当遇到如下形式的表达式时 Object(参数1,....,参数N)，apply方法就会被调用，
   //通常，这样一个apply方法返回的是伴生类的对象
   //如:Array("Mary", "had", "a")
-  //为什么不用构造器呢？对应嵌套表达式而言，省去new关键字会方便很多，
+  //为什么不用构造器呢？对应嵌套表达式而言，省去new关键字会方便很多，例如：
+  //Array(Array(1, 7), Array(2, 9))
   def apply(initialBalance:Double)=
     new Account(newUniqueNumber(), initialBalance)
 }
