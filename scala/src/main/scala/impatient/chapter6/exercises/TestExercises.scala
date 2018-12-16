@@ -23,4 +23,17 @@ class TestExercises {
     println(Point(2, 3))
   }
 
+  @Test
+  def testPlayingCardEnum(): Unit ={
+    println(PlayingCardEnum.values)
+  }
+
+  @Test
+  def testCheckCard(): Unit ={
+    val card = new Card(1, PlayingCardEnum.RED)
+    if(card.playingCardEnum == PlayingCardEnum.RED)
+      println("是红桃")
+    else
+      println("不是红桃")
+}
 }
