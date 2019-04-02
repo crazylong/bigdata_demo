@@ -1,12 +1,10 @@
-package impatient.chapter7
 
-package com{
-  package horstmann{
-    package impatient {
+
+package impatient{
+  package chapter7{
       class Employee {
 
       }
-    }
   }
 }
 
