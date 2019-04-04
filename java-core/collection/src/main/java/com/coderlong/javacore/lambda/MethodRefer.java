@@ -22,7 +22,7 @@ public class MethodRefer {
 
 
 
-        //2.普通用法
+        //3.普通用法
         Converter c3 = from -> "fkit.org".indexOf(from);
         System.out.println("普通用法：" + c3.convert("or"));
 
