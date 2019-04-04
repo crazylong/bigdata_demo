@@ -15,5 +15,6 @@ public class MyTest {
 
         MyInterfaceImpl myInterface = new MyInterfaceImpl();
         myInterface.print("hello");
+        myInterface.out();
     }
 }
