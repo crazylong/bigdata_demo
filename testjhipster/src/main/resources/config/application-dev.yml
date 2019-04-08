@@ -19,13 +19,6 @@ logging:
         io.github.jhipster: DEBUG
         com.mycompany.myapp: DEBUG
 
-eureka:
-    instance:
-        prefer-ip-address: true
-    client:
-        service-url:
-            defaultZone: http://admin:${jhipster.registry.password}@localhost:8761/eureka/
-
 spring:
     profiles:
         active: dev
@@ -36,7 +29,6 @@ spring:
     devtools:
         restart:
             enabled: true
-            additional-exclude: .h2.server.properties
         livereload:
             enabled: false # we use Webpack dev server + BrowserSync for livereload
     jackson:
@@ -44,18 +36,20 @@ spring:
             indent-output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:file:./target/h2db/db/testjhipster;DB_CLOSE_DELAY=-1
-        username: testjhipster
+        url: jdbc:mysql://localhost:3306/testjhipster?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+        username: root
         password:
         hikari:
             poolName: Hikari
             auto-commit: false
-    h2:
-        console:
-            enabled: false
+            data-source-properties:
+                cachePrepStmts: true
+                prepStmtCacheSize: 250
+                prepStmtCacheSqlLimit: 2048
+                useServerPrepStmts: true
     jpa:
-        database-platform: io.github.jhipster.domain.util.FixedH2Dialect
-        database: H2
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        database: MYSQL
         show-sql: true
         properties:
             hibernate.id.new_generator_mappings: true
@@ -74,15 +68,6 @@ spring:
         cache-duration: PT1S # 1 second, see the ISO 8601 standard
     thymeleaf:
         cache: false
-    sleuth:
-        sampler:
-            probability: 1 # report 100% of traces
-    zipkin: # Use the "zipkin" Maven profile to have the Spring Cloud Zipkin dependencies
-        base-url: http://localhost:9411
-        enabled: false
-        locator:
-            discovery:
-                enabled: true
 
 server:
     port: 8080
@@ -94,23 +79,12 @@ server:
 # ===================================================================
 
 jhipster:
-    gateway:
-        rate-limiting:
-            enabled: false
-            limit: 100000
-            duration-in-seconds: 3600
-        authorized-microservices-endpoints: # Access Control Policy, if left empty for a route, all endpoints will be accessible
-            app1: /api,/v2/api-docs # recommended dev configuration
     http:
         version: V_1_1 # To use HTTP/2 you will need to activate TLS (see application-tls.yml)
     cache: # Cache configuration
-        hazelcast: # Hazelcast distributed cache
-            time-to-live-seconds: 3600
-            backup-count: 1
-            management-center: # Full reference is available at: http://docs.hazelcast.org/docs/management-center/3.9/manual/html/Deploying_and_Starting.html
-                enabled: false
-                update-interval: 3
-                url: http://localhost:8180/mancenter
+        ehcache: # Ehcache configuration
+            time-to-live-seconds: 3600 # By default objects stay 1 hour in the cache
+            max-entries: 100 # Number of objects in each cache entry
     # CORS is only enabled by default with the "dev" profile, so BrowserSync can access the API
     cors:
         allowed-origins: "*"
@@ -123,7 +97,7 @@ jhipster:
         authentication:
             jwt:
                 # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-                base64-secret: M2NjNGRlN2I0ZWUyOGRhYmY3NDkxOWFhOWI3YmJlN2UwYWVmOWIwZWU4YWEyMDI0ODM2NjNmMmQzZTcwODYwYTgwNDRmZmFhODk2MzgwM2RmMDZjNGQ4M2RkYWYwY2Y1OWMwNDAyMzVlNjc2ODU0OGVjYzQyMzU4MmRhNzMwMmQ=
+                base64-secret: OTI2YjEzOWJlNWY3NTYwNzI5YzE4ODJlMjBiNmYwMjUyZTFiYzNjNWNmMTYxODYyNDY4YmQ0YjM0Mjk3YzUyYTVkNjRjNjQ1ZTRlMTM2MjFhMTc5YjkzYWU0ZjY5NzhmYTU4NGY5NGUwOWFlZDUyZmU0ZTdiZGRjYzA5ZWMxOWQ=
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000

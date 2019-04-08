@@ -1,35 +1,35 @@
 {
-  "generator-jhipster": {
-    "promptValues": {
-      "packageName": "com.mycompany.myapp"
-    },
-    "jhipsterVersion": "5.8.2",
-    "applicationType": "gateway",
-    "baseName": "testjhipster",
-    "packageName": "com.mycompany.myapp",
-    "packageFolder": "com/mycompany/myapp",
-    "serverPort": "8080",
-    "authenticationType": "jwt",
-    "cacheProvider": "hazelcast",
-    "enableHibernateCache": false,
-    "websocket": false,
-    "databaseType": "sql",
-    "devDatabaseType": "h2Disk",
-    "prodDatabaseType": "mysql",
-    "searchEngine": false,
-    "messageBroker": false,
-    "serviceDiscoveryType": "eureka",
-    "buildTool": "maven",
-    "enableSwaggerCodegen": false,
-    "jwtSecretKey": "M2NjNGRlN2I0ZWUyOGRhYmY3NDkxOWFhOWI3YmJlN2UwYWVmOWIwZWU4YWEyMDI0ODM2NjNmMmQzZTcwODYwYTgwNDRmZmFhODk2MzgwM2RmMDZjNGQ4M2RkYWYwY2Y1OWMwNDAyMzVlNjc2ODU0OGVjYzQyMzU4MmRhNzMwMmQ=",
-    "clientFramework": "angularX",
-    "useSass": false,
-    "clientPackageManager": "npm",
-    "testFrameworks": [],
-    "jhiPrefix": "jhi",
-    "entitySuffix": "",
-    "dtoSuffix": "DTO",
-    "otherModules": [],
-    "enableTranslation": false
-  }
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "com.mycompany.myapp"
+        },
+        "jhipsterVersion": "5.8.2",
+        "applicationType": "monolith",
+        "baseName": "testjhipster",
+        "packageName": "com.mycompany.myapp",
+        "packageFolder": "com/mycompany/myapp",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "ehcache",
+        "enableHibernateCache": false,
+        "websocket": false,
+        "databaseType": "sql",
+        "devDatabaseType": "mysql",
+        "prodDatabaseType": "mysql",
+        "searchEngine": false,
+        "messageBroker": false,
+        "serviceDiscoveryType": false,
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "OTI2YjEzOWJlNWY3NTYwNzI5YzE4ODJlMjBiNmYwMjUyZTFiYzNjNWNmMTYxODYyNDY4YmQ0YjM0Mjk3YzUyYTVkNjRjNjQ1ZTRlMTM2MjFhMTc5YjkzYWU0ZjY5NzhmYTU4NGY5NGUwOWFlZDUyZmU0ZTdiZGRjYzA5ZWMxOWQ=",
+        "clientFramework": "angularX",
+        "useSass": false,
+        "clientPackageManager": "npm",
+        "testFrameworks": [],
+        "jhiPrefix": "jhi",
+        "entitySuffix": "",
+        "dtoSuffix": "DTO",
+        "otherModules": [],
+        "enableTranslation": false
+    }
 }
