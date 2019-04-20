@@ -31,5 +31,9 @@ public class StringCompTest {
         System.out.println(s1.equals(s7));//true
         //使用new String()创建的字符串对象是运行时创建出来的，
         //它被保存在运行时内存区(即堆内存)内，不会放入常量池
+
+        //String s1 = "疯狂Java"; 可以看成字节码常量
+        //s7.intern() 可以看成运行时常量
+        System.out.println(s1 == s7.intern());//true
     }
 }
