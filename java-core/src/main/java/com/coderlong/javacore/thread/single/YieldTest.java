@@ -1,6 +1,7 @@
 package com.coderlong.javacore.thread.single;
 
 /**
+ * vs sleep:可以让当前线程暂停，但不会阻塞该线程，只是将线程转入就绪状态
  * @author Long Qiong
  * @create 2019/3/29
  */
