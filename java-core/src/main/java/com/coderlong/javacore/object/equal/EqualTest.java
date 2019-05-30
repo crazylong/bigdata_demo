@@ -15,13 +15,22 @@ public class EqualTest {
         String f = "hello";
 
         //基本类型比较
-        System.out.println(a == b);
-        System.out.println(a == c);
-        System.out.println(d == e);
-        System.out.println("hello" == d);
-        System.out.println("hello" == new String("hello"));
-        System.out.println("hello" == "hello");
-        System.out.println("hello" == f);
+        System.out.println(a == b);//true
+        System.out.println(a == c);//true
+        System.out.println(d == e);//false
+        System.out.println("hello" == d);//false
+        System.out.println("hello" == new String("hello"));//false
+        System.out.println("hello" == "hello");//true
+        System.out.println("hello" == f);//true
 
+        Integer i1 = 10;
+        Integer i2 = 10;
+        System.out.println(i1==i2);//true
+
+        Integer i3 = 128;
+        Integer i4 = 128;
+        System.out.println(i3==i4);//false
+
+        Integer.valueOf(128);
     }
 }
