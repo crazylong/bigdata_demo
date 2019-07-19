@@ -10,6 +10,7 @@
     <modules>
         <module>helloworld</module>
         <module>kafka</module>
+        <module>spark-streaming-gps</module>
     </modules>
 
     <!-- 表明当前项目是一个父项目，没有具体代码，只有声明的共有信息 -->
