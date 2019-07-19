@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p style="font-size:18px;line-height: 10px;letter-spacing: 5px;">
+    1.flume优势：flume配置各种数据源的source/sink，扩展性好，flume对hdfs写有很高的性能，同时可以减少代码量，只需配置即可，
+    &nbsp; &nbsp;当然也可对sink加工出符合自己要求的数据；
+    2.flume缺陷：当流量达到70m/s时会有数据丢失；
+    3.实时展示采用h5+websocket+netty实现：
+    &nbsp; &nbsp;优点：采用websocket只需一次握手，相对于http请求的三次握手可节省网络资源(https://www.runoob.com/html/html5-websocket.html)
+    &nbsp; &nbsp;缺点：1.因为原来采用ajax实现，返工工作量太大；
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2.websocket建立的长连接当用户量增加时带来的性能问题还需要评估；
+    4.实时统计分析在spark steaming中先将批数据做一次预统计，然后跟mysql/oracle中数据累加；
+    5.回放功能也可以使用redis+websocket+netty的方案实现；
+    6.智能感知数据存储方案与回放功能的数据存储没有想好。
+</p>
+</body>
+</html>
