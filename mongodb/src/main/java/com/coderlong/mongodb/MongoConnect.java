@@ -18,15 +18,22 @@ public class MongoConnect {
                 append("description", "database").
                 append("likes", 100).
                 append("by", "Fly");
+        collection.insertOne(document);
+
+
         List<Document> documents = new ArrayList<Document>();
 
-        documents.add(document);
+        Document document2 = new Document("title", "hbase").
+                append("description", "hdfs").
+                append("likes", 50).
+                append("by", "小白");
+        documents.add(document2);
+
         documents.add(new Document("title", "neo4j").
                 append("description", "图计算库").
                 append("likes", 120).
                 append("by", "Sky"));
 
-        collection.insertOne(document);
         collection.insertMany(documents);
     }
 
