@@ -27,8 +27,9 @@ public class ProducerGpsJava {
         //props.put("partition", 6);
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(props);
+        //producer.send(new ProducerRecord<>("gpsTest2",  mockData2().toJSONString()));
         while (true){
-            producer.send(new ProducerRecord<>("gpsTest",  mockData().toJSONString()));
+            producer.send(new ProducerRecord<>("gpsTest2",  mockData2().toJSONString()));
 
         }
 //        ExecutorService executorService = Executors.newFixedThreadPool(3);
@@ -50,6 +51,18 @@ public class ProducerGpsJava {
         String randomNo = "浙" + String.valueOf(random.nextLong());
         String time = String.valueOf(System.currentTimeMillis());
         String info = "{\"method\":\"NOTIFY\",\"type\":\"51234@gps@809\",\"from\":\"{A74030B9-64FB-463C-8E1C-A50965D25F41}\",\"to\":\"\",\"call_id\":\"F099E56A-9D89-4326-A36F-7D4BB8A19456\",\"info\":{\"NO\":\"" + randomNo + "\",\"area1\":\"B\",\"area2\":0,\"color\":2,\"data_type\":3,\"gnsscenterid\":51234,\"gps\":{\"alarm\":0,\"altitude\":0,\"cmb_date\":\"2019-06-17 18:46:17\",\"direction\":181,\"excrypt\":0,\"lat\":\"29.877796\",\"lon\":\"121.889571\",\"state\":3,\"time\":\"" + time + "\",\"vec1\":2,\"vec2\":3,\"vec3\":285312},\"type\":0}}";
+
+        jpsJson = JSONObject.parseObject(info);
+        return jpsJson;
+    }
+
+    private static JSONObject mockData2(){
+        JSONObject jpsJson;
+        String uuid = UUID.randomUUID().toString();
+
+        String randomNo = "湘" + String.valueOf(random.nextLong());
+        String time = String.valueOf(System.currentTimeMillis());
+        String info = "{\"NO\":\"" + randomNo + "\",\"area1\":\"B\",\"area2\":0,\"color\":2,\"data_type\":3,\"gnsscenterid\":51234,\"alarm\":0,\"altitude\":0,\"cmb_date\":\"2019-06-17 18:46:17\",\"direction\":181,\"excrypt\":0,\"lat\":\"29.877796\",\"lon\":\"121.889571\",\"state\":3,\"time\":\"" + time + "\",\"vec1\":2,\"vec2\":3,\"vec3\":285312,\"type\":0}";
 
         jpsJson = JSONObject.parseObject(info);
         return jpsJson;

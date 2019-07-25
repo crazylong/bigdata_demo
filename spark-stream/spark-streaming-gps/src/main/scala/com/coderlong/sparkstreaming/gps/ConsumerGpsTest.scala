@@ -1,17 +1,13 @@
 package com.coderlong.sparkstreaming.gps
 
 import java.sql.{DriverManager, PreparedStatement}
-import java.util
 import java.util.Properties
-import java.util.regex.Pattern
 
-import cn.hutool.core.date.DateUtil
 import com.alibaba.fastjson.JSONObject
 import com.coderlong.sparkstreaming.util.JsonParse
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.spark.SparkConf
-import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming.dstream.{DStream, InputDStream}
 import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe
 import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent
@@ -52,7 +48,7 @@ object ConsumerGpsTest {
     conf.set("spark.streaming.kafka.maxRatePerPartition","50")
     val ssc = new StreamingContext(conf,Durations.seconds(10))
     //设置日志级别
-    ssc.sparkContext.setLogLevel("Error")
+    //ssc.sparkContext.setLogLevel("Error")
 
     val kafkaParams = Map[String, Object](
       "bootstrap.servers" -> "hadoop01:9092,hadoop02:9092,hadoop03:9092",
@@ -92,13 +88,17 @@ object ConsumerGpsTest {
     connProp.setProperty("phoenix.mutate.maxSize", "2000000") //客户端批处理的最大行数
     connProp.setProperty("phoenix.mutate.maxSizeBytes", "1048576000") //客户端批处理的最大数据量 1g
 
-    try {
+//    Class.forName("org.apache.phoenix.queryserver.client.Driver")
+//    val driverConn = DriverManager.getConnection("jdbc:phoenix:thin:url=http://hadoop01:8765;serialization=PROTOBUF;", connProp)
+//    val connBroadcast: Broadcast[Connection] = ssc.sparkContext.broadcast(driverConn)
+
+    try
       kafkaRDD.foreachRDD(rdd => {
         rdd.foreachPartition(par => {
-
-          Class.forName("org.apache.phoenix.queryserver.client.Driver")
-          val conn = DriverManager.getConnection("jdbc:phoenix:thin:url=http://hadoop01:8765;serialization=PROTOBUF;", connProp)
-
+          //Class.forName("org.apache.phoenix.queryserver.client.Driver")
+          //val conn = DriverManager.getConnection("jdbc:phoenix:thin:url=http://hadoop01:8765;serialization=PROTOBUF;", connProp)
+          Class.forName("=org.apache.phoenix.jdbc.PhoenixDriver")
+          val conn = DriverManager.getConnection("jdbc:phoenix:hadoop01,hadoop02,hadoop03:2181", connProp)
           conn.setAutoCommit(false)
           var stmt: PreparedStatement = conn.prepareStatement("UPSERT INTO NBGGPSINFO2 VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
           par.foreach(line => {
@@ -124,8 +124,10 @@ object ConsumerGpsTest {
           println("========保存成功=============")
         })
       })
-    } catch {
+    catch {
       case e => e.printStackTrace()
+    } finally {
+
     }
     /**
       * 以上业务处理完成之后，异步的提交消费者offset,这里将 enable.auto.commit 设置成false,就是使用kafka 自己来管理消费者offset
