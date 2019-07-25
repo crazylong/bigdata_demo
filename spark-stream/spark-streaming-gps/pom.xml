@@ -8,7 +8,6 @@
     <artifactId>spark-streaming-gps</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- 配置以下可以解决 在jdk1.8环境下打包时报错 “-source 1.5 中不支持 lambda 表达式” -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -35,11 +34,11 @@
             <version>2.3.1</version>
         </dependency>-->
         <!--mysql依赖的jar包-->
-        <dependency>
+        <!--<dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.47</version>
-        </dependency>
+        </dependency>-->
         <!--SparkStreaming-->
         <dependency>
             <groupId>org.apache.spark</groupId>
@@ -120,12 +119,22 @@
                 </exclusion>
             </exclusions>
         </dependency>-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.phoenix</groupId>
             <artifactId>phoenix-queryserver-client</artifactId>
             <version>4.14.0-cdh5.14.2</version>
-        </dependency>
+        </dependency>-->
 
+        <dependency>
+            <groupId>org.apache.phoenix</groupId>
+            <artifactId>phoenix-client</artifactId>
+            <version>4.14.0-cdh5.14.2</version>
+        </dependency>
+        <!--<dependency>
+            <groupId>org.apache.phoenix</groupId>
+            <artifactId>phoenix-core</artifactId>
+            <version>4.14.0-cdh5.14.2</version>
+        </dependency>-->
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
