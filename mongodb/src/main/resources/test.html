@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery_2.2.4.min.js"></script>
+    <script type="text/javascript">
+
+        var e;
+        function startBtn() {
+            debugger
+            setInterval(function () {
+                $.get("user.json", function (data) {
+                    var d = data;
+                    e = d;
+                    //console.log(d);
+                    // d = null;
+                    // data = null;
+                    // delete d;
+                    // delete data;
+                })
+            }, 5);
+        }
+
+
+    </script>
+</head>
+<body>
+<button value="start" onclick="startBtn()">start</button>
+
+</body>
+</html>
