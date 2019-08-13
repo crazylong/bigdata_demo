@@ -7,9 +7,9 @@ public class ThinClient {
     public static void main(String[] args) {
         //getConn();
         ThinClient phoenix = new ThinClient();
-        //phoenix.query();
+        phoenix.query();
         //phoenixthin.createTable();
-        phoenix.upsert();
+        //phoenix.upsert();
     }
 
     public void upsert(){
@@ -52,7 +52,7 @@ public class ThinClient {
 
         PreparedStatement pstmt = null;
         try {
-            pstmt = conn.prepareStatement("select CAR_NO, GPS_TIME from NBGTRUCKGPS limit 10");
+            pstmt = conn.prepareStatement("select CAR_NO, GPS_TIME from NBGGPSINFO limit 10");
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 System.out.println("symbol:"+rs.getString(1) + ", company:" + rs.getString(2));
