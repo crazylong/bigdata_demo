@@ -12,7 +12,7 @@
 		</commentGenerator>
 		<!--数据库链接URL，用户名、密码 -->
 		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
-			connectionURL="jdbc:oracle:thin:@10.160.100.4:1521/warehouse" userId="dd_user" password="dd_user">
+			connectionURL="jdbc:oracle:thin:@192.168.226.27:1521/orcl" userId="gk3" password="gk3">
 		</jdbcConnection>
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
@@ -31,7 +31,7 @@
 		<!-- 生成DAO的包名和位置 <javaClientGenerator type="XMLMAPPER" targetPackage="test.dao"
 			targetProject="src"> <property name="enableSubPackages" value="true"/> </javaClientGenerator> -->
 		<!-- 要生成哪些表 -->
-		<table tableName="device_mac_last_data" domainObjectName="DeviceMacLastData"   enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
+		<table tableName="mc_truck" domainObjectName="Truck"   enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
 
 
   </context>
