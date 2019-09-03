@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -19,10 +20,10 @@ public class TruckGps {
     private String truckCode;
 
     
-    private Double longitude;
+    private BigDecimal longitude;
 
     
-    private Double latitude;
+    private BigDecimal latitude;
 
     
     private Long direction;
