@@ -111,5 +111,17 @@ class ScalaTest {
     println(msg)
   }
 
-  1 to 10
+  @Test
+  def testTuple2(): Unit ={
+    var tuple2 : (String, Int) = ("a", 1)
+    println(tuple2)
+  }
+
+  @Test
+  def testFormat(): Unit ={
+    val sql = "hi, %s, fuck you %s".format("xiao ming", "haha")
+    println(sql)
+    println("%1$s-%2$s-%3$s".format("spark","scala","ml"))
+  }
+  //1 to 10
 }
