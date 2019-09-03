@@ -11,32 +11,33 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TruckGpsMongo extends MongoBean  {
+public class EmptyContainerGpsMongo extends MongoBean {
     private Long ID;
-
-    private String TRUCK_CODE;
+    
+    private String EQUIPMENT_CODE;
 
     private Point POINT;
-    
+
     private Long DIRECTION;
+
     
     private Long SPEED;
+
     
     private String MAPCLASS;
+
     
     private String MAPID;
+
     
     private String MAPNM;
-    
-    private String REMARK;
+
     
     private Date INSERT_TIME;
+
+    
+    private Long HEIGHT;
+
     
     private String TERMINAL_CODE;
-
-    private Long STATUS_ID;
-
-    private Long JOB_ID;
-
-    private String DML;
 }

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -16,10 +17,10 @@ public class GantryCraneGps {
 
 
     private String equipmentCode;
-    private Double longitude;
+    private BigDecimal longitude;
 
 
-    private Double latitude;
+    private BigDecimal latitude;
 
 
     private Long direction;
@@ -40,4 +41,6 @@ public class GantryCraneGps {
 
 
     private Date insertTime;
+
+    private String terminalCode;
 }
