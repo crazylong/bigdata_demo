@@ -12,7 +12,7 @@ import scala.collection.mutable.ArrayBuffer
 object DouglasPeucker{
   def main(args: Array[String]): Unit = {
     val gpsArray = mockData()
-    val vacuateGps = reduction(gpsArray, 200)
+    val vacuateGps = reduction(gpsArray, 20000)
     println(vacuateGps)
 
   }
@@ -23,7 +23,7 @@ object DouglasPeucker{
     val baseLat = 39034245
     val baseTimestamp = System.currentTimeMillis()
 
-    for(i <- 1 to 100000){
+    for(i <- 1 to 1000000){
       val gps = new JSONObject()
       gps.put("lng", baseLng + i)
       gps.put("lat", baseLat + i)
@@ -32,6 +32,8 @@ object DouglasPeucker{
     }
     gpsData.toArray
   }
+
+
 
 //  def reduction(traj :Trajectory,bound:Double= 50):Trajectory = {
 //    val gPSPoint = traj.GPSPoints
@@ -92,10 +94,10 @@ object DouglasPeucker{
    * @return distance in kilometer
    */
   private def getDistance(p1: JSONObject,p2:JSONObject):Double = {
-    val lat1 = (Math.PI/180)*p1.getDouble("lat")/100000
-    val lat2 = (Math.PI/180)*p2.getDouble("lat")/100000
-    val lon1 = (Math.PI/180)*p1.getDouble("lng")/100000
-    val lon2 = (Math.PI/180)*p2.getDouble("lng")/100000
+    val lat1 = (Math.PI/180)*p1.getDouble("lat")/1000000
+    val lat2 = (Math.PI/180)*p2.getDouble("lat")/1000000
+    val lon1 = (Math.PI/180)*p1.getDouble("lng")/1000000
+    val lon2 = (Math.PI/180)*p2.getDouble("lng")/1000000
     val R = 6371
     val distance = Math.acos(Math.sin(lat1)*Math.sin(lat2)+Math.cos(lat1)*Math.cos(lat2)*Math.cos(lon2-lon1))*R
     distance
