@@ -3,7 +3,7 @@ package impatient.chapter13
 import org.junit.Test
 
 import scala.collection.mutable
-import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 class MyCollection {
 
@@ -44,10 +44,29 @@ class MyCollection {
     list1 -= 3
     println(list1)
 
-    val list2 : ListBuffer[Map[String, Int]] = ListBuffer(Map(("a"-> 1), ("b"-> 2)))
+    val list2 : ListBuffer[Map[String, Int]] = ListBuffer(Map(("a"-> 1), ("d"-> 4)))
 
     println(list2)
     list2 += Map(("c", 3))
+    println(list2)
+
+    println(list2(0))
+    println(list2(0) += ("c"->3))
+    println(list2)
+  }
+
+  @Test
+  def testArrayBuffer(): Unit ={
+
+
+    val list2 : ArrayBuffer[Map[String, Int]] = ArrayBuffer(Map(("a"-> 2), ("d"-> 4)), Map(("a"-> 1), ("d"-> 4)), Map(("a"-> 3), ("d"-> 4), ("c"->5)))
+
+    println(list2)
+    list2 += Map(("c", 3))
+    println(list2)
+
+    println(list2(0))
+    println(list2(0) += ("c"->3))
     println(list2)
   }
 

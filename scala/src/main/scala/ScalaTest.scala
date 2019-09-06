@@ -1,5 +1,7 @@
 import org.junit.Test
 
+import scala.collection.mutable.ArrayBuffer
+
 /**
   *
   * @author Long Qiong 
@@ -124,4 +126,20 @@ class ScalaTest {
     println("%1$s-%2$s-%3$s".format("spark","scala","ml"))
   }
   //1 to 10
+
+  @Test
+  def testGroup(): Unit ={
+    var source = ArrayBuffer[Map[String, Int]]()
+    source += Map(("a"-> 1), ("b"->2), ("c"->3))
+    source += Map(("a"-> 1), ("b"->2), ("c"->4))
+    source += Map(("a"-> 1), ("b"->22), ("c"->4))
+
+    var groups: Map[(Option[Int], Option[Int]), ArrayBuffer[Map[String, Int]]] = source.groupBy(s => (s.get("a"), s.get("b")))
+
+    println(groups)
+
+    //groups.map(s => println(s._2(0)))
+    var map = groups.map(s => s._2(0))
+    println(map)
+  }
 }
