@@ -1,7 +1,6 @@
 package com.coderlong.mybatisplus;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.coderlong.mybatisplus.mapper.*;
@@ -10,22 +9,17 @@ import com.cybermkd.mongo.kit.MongoKit;
 import com.cybermkd.mongo.kit.MongoQuery;
 import com.cybermkd.mongo.kit.index.MongoIndex;
 import com.cybermkd.mongo.plugin.MongoPlugin;
-import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.net.SocketTimeoutException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 
 @RunWith(SpringRunner.class)
@@ -41,13 +35,28 @@ public class OracleToMongodb {
     private GantryCraneGpsMapper gantryCraneGpsMapper;
 
     @Resource
+    private GantryCraneSnapMapper gantryCraneSnapMapper;
+
+    @Resource
     private BridgeCraneGpsMapper bridgeCraneGpsMapper;
+
+    @Resource
+    private BridgeCraneSnapMapper bridgeCraneSnapMapper;
 
     @Resource
     private EmptyContainerGpsMapper emptyContainerGpsMapper;
 
     @Resource
+    private EmptyContainerSnapMapper emptyContainerSnapMapper;
+
+    @Resource
     private ReachStackerGpsMapper reachStackerGpsMapper;
+
+    @Resource
+    private ReachStackerSnapMapper reachStackerSnapMapper;
+
+    @Resource
+    private YardSnapMapper yardSnapMapper;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -356,9 +365,8 @@ public class OracleToMongodb {
 
     @Test
     public void mockGpsDataYard(){
-        List<YardGpsMongo> list = jdbcTemplate.query("select id as GPS_ID, yard_Code as GPS_YARD_CODE, mapclass as GPS_MAPCLASS, mapid as GPS_MAPID, mapnm as GPS_MAPNM, graph as GPS_GRAPH, \n" +
-                "coordinates as GPS_COORDINATES, insert_Time as GPS_INSERT_TIME, TERMINAL_CODE as GPS_TERMINAL_CODE \n" +
-                "from MC_YARD_gps", new YardGpsMongoMapper());
+        List<YardGpsMongo> list = jdbcTemplate.query("SELECT A.*, B.ID AS STATUS_ID FROM MC_YARD_GPS A \n" +
+                "INNER JOIN MC_YARD_SNAP B ON A.ID = B.GPS_ID", new YardGpsMongoMapper());
 
 //        List<Map<String, Object>> list = jdbcTemplate.queryForList("select id as GPS_ID, yard_Code as GPS_YARD_CODE, mapclass as GPS_MAPCLASS, mapid as GPS_MAPID, mapnm as GPS_MAPNM, graph as GPS_GRAPH, \n" +
 //                "coordinates as GPS_COORDINATES, insert_Time as GPS_INSERT_TIME, TERMINAL_CODE as GPS_TERMINAL_CODE \n" +
@@ -371,8 +379,9 @@ public class OracleToMongodb {
         if(list != null){
             list.forEach(gpsMongo -> {
                 query.add(new MongoQuery().set(gpsMongo));
-                query.saveList();
+                //query.saveList();
             });
+            query.saveList();
         }
 
         client.close();
@@ -458,6 +467,7 @@ public class OracleToMongodb {
         client.close();
     }
 
+
     @Test
     public void createIndex(){
         //createIndex("MC_TRUCK_GPS");
@@ -502,6 +512,109 @@ public class OracleToMongodb {
                         .modify("STATUS_ID", truckSnap.getStatusId())
                         .modify("JOB_ID", truckSnap.getJobId())
                         .modify("DML", truckSnap.getDml()).update();
+            }
+        }
+
+        client.close();
+    }
+
+    @Test
+    public void mockGantryCraneSnap(){
+        MongoClient client = init();
+
+        for(int i = 1; i <= 40; i++){
+            Page<GantryCraneSnap> page = new Page<>(i, 1000);
+            IPage<GantryCraneSnap> snapList = this.gantryCraneSnapMapper.selectPage(page, null);
+            for(GantryCraneSnap snap : snapList.getRecords()){
+                MongoQuery query=new MongoQuery();
+                query.use("MC_GANTRYCRANE_GPS");
+                query.eq("ID", snap.getGpsId())
+                        .modify("STATUS_ID", snap.getStatusId())
+                        .modify("JOB_ID", snap.getJobId())
+                        .modify("DML", snap.getDml()).update();
+            }
+        }
+
+        client.close();
+    }
+
+    @Test
+    public void mockBridgeCraneSnap(){
+        MongoClient client = init();
+
+        for(int i = 1; i <= 30; i++){
+            Page<BridgeCraneSnap> page = new Page<>(i, 1000);
+            IPage<BridgeCraneSnap> snapList = this.bridgeCraneSnapMapper.selectPage(page, null);
+            for(BridgeCraneSnap snap : snapList.getRecords()){
+                MongoQuery query=new MongoQuery();
+                query.use("MC_BRIDGECRANE_GPS");
+                query.eq("ID", snap.getGpsId())
+                        .modify("STATUS_ID", snap.getStatusId())
+                        .modify("JOB_ID", snap.getJobId())
+                        .modify("DML", snap.getDml()).update();
+            }
+        }
+
+        client.close();
+    }
+
+
+    @Test
+    public void mockReachStackerSnap(){
+        MongoClient client = init();
+
+        for(int i = 1; i <= 1; i++){
+            Page<ReachStackerSnap> page = new Page<>(i, 1000);
+            IPage<ReachStackerSnap> snapList = this.reachStackerSnapMapper.selectPage(page, null);
+            for(ReachStackerSnap snap : snapList.getRecords()){
+                MongoQuery query=new MongoQuery();
+                query.use("MC_REACHSTACKER_GPS");
+                query.eq("ID", snap.getGpsId())
+                        .modify("STATUS_ID", snap.getStatusId())
+                        .modify("JOB_ID", snap.getJobId())
+                        .modify("DML", snap.getDml()).update();
+            }
+        }
+
+        client.close();
+    }
+
+    @Test
+    public void mockEmptyContainerSnap(){
+        MongoClient client = init();
+
+        for(int i = 1; i <= 4; i++){
+            Page<EmptyContainerSnap> page = new Page<>(i, 1000);
+            IPage<EmptyContainerSnap> snapList = this.emptyContainerSnapMapper.selectPage(page, null);
+            for(EmptyContainerSnap snap : snapList.getRecords()){
+                MongoQuery query=new MongoQuery();
+                query.use("MC_EMPTYCONTAINER_GPS");
+                query.eq("ID", snap.getGpsId())
+                        .modify("STATUS_ID", snap.getStatusId())
+                        .modify("JOB_ID", snap.getJobId())
+                        .modify("DML", snap.getDml()).update();
+            }
+        }
+
+        client.close();
+    }
+
+    @Test
+    public void mockYardSnap(){
+        MongoClient client = init();
+
+
+
+
+        for(int i = 1; i <= 650; i++){
+            Page<YardSnap> page = new Page<>(i, 1000);
+            IPage<YardSnap> snapList = this.yardSnapMapper.selectPage(page, null);
+            for(YardSnap snap : snapList.getRecords()){
+                MongoQuery query=new MongoQuery();
+                query.use("MC_YARD_GPS");
+                query.eq("ID", snap.getGpsId())
+                        .modify("STATUS_ID", snap.getStatusId())
+                        .update();
             }
         }
 

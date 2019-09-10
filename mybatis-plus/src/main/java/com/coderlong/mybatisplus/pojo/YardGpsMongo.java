@@ -11,25 +11,27 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class YardGpsMongo extends MongoBean {
-    private Long GPS_ID;
-    private String GPS_YARD_CODE;
+    private Long ID;
+    private String YARD_CODE;
 
-    private String GPS_MAPCLASS;
-
-
-    private String GPS_MAPID;
+    private String MAPCLASS;
 
 
-    private String GPS_MAPNM;
+    private String MAPID;
 
 
-    private String GPS_GRAPH;
+    private String MAPNM;
 
 
-    private String GPS_COORDINATES;
+    private String GRAPH;
 
 
-    private Date GPS_INSERT_TIME;
+    private String COORDINATES;
 
-    private String GPS_TERMINAL_CODE;
+
+    private Date INSERT_TIME;
+
+    private String TERMINAL_CODE;
+
+    private Long STATUS_ID;
 }
