@@ -13,6 +13,7 @@
         <module>phoenix-thin</module>
         <module>phoenix-client</module>
         <module>phoenix-mybatis</module>
+        <module>phoenix-spark</module>
     </modules>
 
     <properties>
