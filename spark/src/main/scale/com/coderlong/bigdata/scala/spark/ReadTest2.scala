@@ -1,7 +1,7 @@
-package com.coderlong.bigdata.spark
+package com.coderlong.bigdata.scala.spark
 
 import com.alibaba.fastjson.JSONObject
-import com.coderlong.bigdata.spark.vacuate.DouglasPeucker
+import com.coderlong.bigdata.scala.spark.vacuate.DouglasPeucker
 import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.sql.SparkSession
 

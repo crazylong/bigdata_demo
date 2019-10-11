@@ -1,4 +1,4 @@
-package com.coderlong.bigdata.spark.sql;
+package com.coderlong.bigdata.scala.spark.sql;
 
 /**
   *

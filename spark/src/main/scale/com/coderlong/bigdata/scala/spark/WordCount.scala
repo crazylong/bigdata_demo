@@ -1,4 +1,4 @@
-package com.coderlong.bigdata.spark;
+package com.coderlong.bigdata.scala.spark
 
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkConf
@@ -20,7 +20,7 @@ object WordCount {
       .setAppName("myWordCount")
       .setMaster("yarn")
       //.setMaster("yarn-client")
-      .setJars(Array("E:\\books\\大数据\\bigdata_demo\\spark\\target\\spark-1.0-SNAPSHOT.jar"))
+      //.setJars(Array("E:\\books\\大数据\\bigdata_demo\\spark\\target\\spark-1.0-SNAPSHOT.jar"))
       //.setIfMissing("spark.driver.host", "192.168.153.161")
       .set("deploy-mode", "client")
       //.set("spark.sql.hive.metastore.jars", "builtin")
@@ -53,7 +53,7 @@ object WordCount {
     //val file: RDD[String] = sc.textFile("hdfs://cdh02-05:8020/user/admin/test.txt")
 
     //采用submit提交
-    val file: RDD[String] = sc.textFile("hdfs://nameservice1/user/admin/test.txt")
+    val file: RDD[String] = sc.textFile("hdfs://nameservice1/test.txt")
     val words: RDD[String] = file.flatMap(_.split(" "))
     val tuple:RDD[(String, Int)] = words.map((_,1))
     val result: RDD[(String, Int)] = tuple.reduceByKey(_+_)
