@@ -1,4 +1,4 @@
-package com.coderlong.bigdata.spark.vacuate
+package com.coderlong.bigdata.scala.spark.vacuate
 
 import com.alibaba.fastjson.JSONObject
 

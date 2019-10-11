@@ -1,4 +1,4 @@
-package com.coderlong.bigdata.spark;
+package com.coderlong.bigdata.scala.spark;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
