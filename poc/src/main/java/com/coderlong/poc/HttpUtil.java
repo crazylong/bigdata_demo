@@ -3,11 +3,13 @@ package com.coderlong.poc;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -63,6 +65,7 @@ public class HttpUtil {
         String url = "https://poblockchain.club/web_api/star/createOrder";
         CloseableHttpClient httpClient = HttpClients.createDefault();
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
+
         StringEntity requestEntity = new StringEntity(param,"utf-8");
         requestEntity.setContentType("application/json");
         requestEntity.setContentEncoding("utf-8");
@@ -89,6 +92,47 @@ public class HttpUtil {
 
         return JSONObject.parseObject(returnValue==null ? "" : returnValue.toString());
     }
+
+    public static JSONObject post2(String cookie, String bfc_token, String param) throws Exception {
+        String url = "https://poblockchain.club/web_api/star/createOrder";
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        ResponseHandler<String> responseHandler = new BasicResponseHandler();
+
+        StringEntity requestEntity = new StringEntity(param,"utf-8");
+        requestEntity.setContentType("application/json");
+        requestEntity.setContentEncoding("utf-8");
+
+        HttpPost httpPost=new HttpPost(url);
+        httpPost.setHeader("Content-type","application/json");
+        httpPost.setHeader("cookie", cookie);
+        httpPost.setHeader("bfc_token", bfc_token);
+
+
+        httpPost.setEntity(requestEntity);
+
+
+        //执行请求操作，并拿到结果（同步阻塞）
+        String body = "";
+        try {
+            CloseableHttpResponse response = httpClient.execute(httpPost);
+
+            //获取结果实体
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                //按指定编码转换结果实体为String类型
+                body = EntityUtils.toString(entity, "utf-8");
+            }
+            EntityUtils.consume(entity);
+            //释放链接
+            response.close();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+
+        return JSONObject.parseObject(body);
+    }
+
 
     /**
      *
