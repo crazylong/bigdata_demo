@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DateUtil {
 
@@ -32,6 +34,17 @@ public class DateUtil {
             System.out.println(calendar.getTimeInMillis());
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void test03(){
+        Map<String, Object> m = new HashMap<>();
+        m.put("a", 1);
+        m.put("b", 2);
+
+        for(Map.Entry<String, Object> entry : m.entrySet()){
+            System.out.println(entry);
         }
     }
 
