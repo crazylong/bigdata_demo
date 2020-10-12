@@ -1,14 +1,6 @@
 package com.coderlong.acp;
 
-import com.aliyun.odps.Instance;
-import com.aliyun.odps.Odps;
-import com.aliyun.odps.OdpsException;
-import com.aliyun.odps.Partition;
-import com.aliyun.odps.PartitionSpec;
-import com.aliyun.odps.Project;
-import com.aliyun.odps.Resource;
-import com.aliyun.odps.Table;
-import com.aliyun.odps.TableResource;
+import com.aliyun.odps.*;
 import com.aliyun.odps.account.Account;
 import com.aliyun.odps.account.AliyunAccount;
 
