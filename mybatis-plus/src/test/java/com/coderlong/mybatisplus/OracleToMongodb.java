@@ -62,6 +62,35 @@ public class OracleToMongodb {
     private JdbcTemplate jdbcTemplate;
 
     @Test
+    public void testTime(){
+//        Long baseTime = 1564639862L;
+//
+//        Date date = new Date(baseTime*1000);
+//        System.out.println(date);
+        Double baseLng = 122.035485;
+        System.out.println(1/1000000.0);
+        BigDecimal b1 = new BigDecimal(1.0);
+        BigDecimal b2 = new BigDecimal(1000000);
+        System.out.println(b1.divide(b2));
+        System.out.println(122.035485 + b1.divide(b2).doubleValue());
+        System.out.println(new BigDecimal(122.035485).add(b1.divide(b2)));
+        System.out.println(new BigDecimal(122.035485).add(b1.divide(b2)).setScale(6, 4));
+        BigDecimal db = new BigDecimal(1.0/1000000);
+        System.out.println(db);
+        //db.doubleValue();
+        System.out.println(baseLng + 1/1000000.0);
+    }
+
+    @Test
+    public void createIndex(){
+        createIndex("MC_TRUCK_GPS");
+        createIndex("MC_GANTRYCRANE_GPS");
+        createIndex("MC_BRIDGECRANE_GPS");
+        createIndex("MC_EMPTYCONTAINER_GPS");
+        createIndex("MC_REACHSTACKER_GPS");
+    }
+
+    @Test
     public void testMongoQuery(){
         MongoClient client = init();
         MongoQuery query=new MongoQuery();
@@ -93,28 +122,6 @@ public class OracleToMongodb {
 //        });
         client.close();
     }
-
-
-    @Test
-    public void testSelectPage() {
-        MongoClient client = init();
-
-        for(int i = 1; i <= 10000; i++){
-            MongoQuery query=new MongoQuery();
-            query.use("MC_TRUCK_GPS");
-            Page<TruckGps> page = new Page<>(i, 1000);
-            IPage<TruckGps> truckGpsList = this.truckGpsMapper.selectPage(page, null);
-            for(TruckGps truckGps : truckGpsList.getRecords()){
-                TruckGpsMongo gpsMongo = new TruckGpsMongo(truckGps.getId(), truckGps.getTruckCode(), new Point(truckGps.getLongitude(), truckGps.getLatitude()), truckGps.getDirection(),truckGps.getSpeed(),truckGps.getMapclass(),truckGps.getMapid(),truckGps.getMapnm(),truckGps.getRemark(),truckGps.getInsertTime(),truckGps.getTerminalCode(), 0L, 0L, "");
-                query.add(new MongoQuery().set(gpsMongo));
-                //query.eq("GPS_ID", truckGps.getId()).delete();
-            }
-            query.saveList();
-        }
-
-        client.close();
-    }
-
 
     @Test
     public void mockGpsDataTruck(){
@@ -158,27 +165,6 @@ public class OracleToMongodb {
         }
         client.close();
     }
-
-    @Test
-    public void testTime(){
-//        Long baseTime = 1564639862L;
-//
-//        Date date = new Date(baseTime*1000);
-//        System.out.println(date);
-        Double baseLng = 122.035485;
-        System.out.println(1/1000000.0);
-        BigDecimal b1 = new BigDecimal(1.0);
-        BigDecimal b2 = new BigDecimal(1000000);
-        System.out.println(b1.divide(b2));
-        System.out.println(122.035485 + b1.divide(b2).doubleValue());
-        System.out.println(new BigDecimal(122.035485).add(b1.divide(b2)));
-        System.out.println(new BigDecimal(122.035485).add(b1.divide(b2)).setScale(6, 4));
-        BigDecimal db = new BigDecimal(1.0/1000000);
-        System.out.println(db);
-        //db.doubleValue();
-        System.out.println(baseLng + 1/1000000.0);
-    }
-
 
     @Test
     public void mockGpsDataGantryCrane(){
@@ -388,6 +374,26 @@ public class OracleToMongodb {
     }
 
     @Test
+    public void mockGpsDataTruckFromOracle() {
+        MongoClient client = init();
+
+        for(int i = 1; i <= 10000; i++){
+            MongoQuery query=new MongoQuery();
+            query.use("MC_TRUCK_GPS");
+            Page<TruckGps> page = new Page<>(i, 1000);
+            IPage<TruckGps> truckGpsList = this.truckGpsMapper.selectPage(page, null);
+            for(TruckGps truckGps : truckGpsList.getRecords()){
+                TruckGpsMongo gpsMongo = new TruckGpsMongo(truckGps.getId(), truckGps.getTruckCode(), new Point(truckGps.getLongitude(), truckGps.getLatitude()), truckGps.getDirection(),truckGps.getSpeed(),truckGps.getMapclass(),truckGps.getMapid(),truckGps.getMapnm(),truckGps.getRemark(),truckGps.getInsertTime(),truckGps.getTerminalCode(), 0L, 0L, "");
+                query.add(new MongoQuery().set(gpsMongo));
+                //query.eq("GPS_ID", truckGps.getId()).delete();
+            }
+            query.saveList();
+        }
+
+        client.close();
+    }
+
+    @Test
     public void mockGpsDataGantryCraneFromOracle(){
         MongoClient client = init();
 
@@ -467,37 +473,6 @@ public class OracleToMongodb {
         client.close();
     }
 
-
-    @Test
-    public void createIndex(){
-        //createIndex("MC_TRUCK_GPS");
-        createIndex("MC_GANTRYCRANE_GPS");
-        createIndex("MC_BRIDGECRANE_GPS");
-        createIndex("MC_EMPTYCONTAINER_GPS");
-        createIndex("MC_REACHSTACKER_GPS");
-        //createIndex("");
-
-    }
-
-    private void createIndex(String tableName){
-        MongoClient client = init();
-        MongoIndex index=new MongoIndex(tableName);
-        //index.ascending("ID").save();
-        if(tableName.equals("MC_TRUCK_GPS")){
-            index.ascending("TRUCK_CODE", "INSERT_TIME").save();
-        } else {
-            index.ascending("EQUIPMENT_CODE", "INSERT_TIME").save();
-        }
-
-        //index.geo2dsphere("POINT").save();
-
-
-        //index.ascending("GPS_ID", "GPS_TRUCK_CODE", "GPS_INSERT_TIME").geo2dsphere("point").save();
-        //index.ascending("GPS_ID", "GPS_TRUCK_CODE", "GPS_INSERT_TIME").save();
-        //index.ascending("GPS_ID").save();
-        client.close();
-    }
-
     @Test
     public void mockTruckSnap(){
         MongoClient client = init();
@@ -506,7 +481,7 @@ public class OracleToMongodb {
             Page<TruckSnap> page = new Page<>(i, 1000);
             IPage<TruckSnap> truckSnapList = this.truckSnapMapper.selectPage(page, null);
             for(TruckSnap truckSnap : truckSnapList.getRecords()){
-                MongoQuery query=new MongoQuery();
+                 MongoQuery query=new MongoQuery();
                 query.use("MC_TRUCK_GPS");
                 query.eq("ID", truckSnap.getGpsId())
                         .modify("STATUS_ID", truckSnap.getStatusId())
@@ -623,11 +598,57 @@ public class OracleToMongodb {
 
     private MongoClient init(){
         MongoPlugin mongoPlugin=new MongoPlugin();
-        mongoPlugin.add("192.168.239.2",27017);
+        //mongoPlugin.add("192.168.239.2",27017);
+        mongoPlugin.add("hadoop01",6666);
         mongoPlugin.setDatabase("mc_gps");
         MongoClient client = mongoPlugin.getMongoClient();
         MongoKit.INSTANCE.init(client, mongoPlugin.getDatabase());
         return client;
         //client.close();
+    }
+
+    @Test
+    public void testQueryTruckGps(){
+        MongoClient client = init();
+        List<Map<String, Object>> list = jdbcTemplate.queryForList("select distinct truck_code as code from mc_truck");
+        if(CollectionUtils.isEmpty(list)){
+            return;
+        }
+
+        List<String> codeList = new ArrayList<>();
+
+        list.forEach(i -> {
+            codeList.add(i.get("code").toString());
+        });
+
+        MongoQuery query=new MongoQuery();
+        List<JSONObject> colList = query.use("MC_TRUCK_GPS")
+                .in("TRUCK_CODE", codeList)
+                .gte("INSERT_TIME", new Date(1505750408000L))
+                 .lt("INSERT_TIME", new Date(1505750412000L))
+                .find();
+
+        System.out.println(colList);
+        System.out.println(colList.size());
+        client.close();
+    }
+
+    private void createIndex(String tableName){
+        MongoClient client = init();
+        MongoIndex index=new MongoIndex(tableName);
+        //index.ascending("ID").save();
+        if(tableName.equals("MC_TRUCK_GPS")){
+            index.ascending("TRUCK_CODE", "INSERT_TIME").save();
+        } else {
+            index.ascending("EQUIPMENT_CODE", "INSERT_TIME").save();
+        }
+
+        //index.geo2dsphere("POINT").save();
+
+
+        //index.ascending("GPS_ID", "GPS_TRUCK_CODE", "GPS_INSERT_TIME").geo2dsphere("point").save();
+        //index.ascending("GPS_ID", "GPS_TRUCK_CODE", "GPS_INSERT_TIME").save();
+        //index.ascending("GPS_ID").save();
+        client.close();
     }
 }
