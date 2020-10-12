@@ -35,6 +35,7 @@ class Sec08 {
     val b = Array("hello", "world")
 
     //def corresponds[B](that: Seq[B])(p: (A, B) => Boolean): Boolean
+    //比较两个序列是否在某个比对条件下相同
     a.corresponds(b)(_.equalsIgnoreCase(_))
 
     //that和p是分开的两个柯里化参数。类型推断器可以分析出B出自that的类型，

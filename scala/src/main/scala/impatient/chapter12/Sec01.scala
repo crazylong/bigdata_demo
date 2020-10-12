@@ -11,7 +11,7 @@ class Sec01 {
   def test01(): Unit ={
     val num = 3.14//类型Double
 
-    //fun 设为ceil含函数
+    //fun 设为ceil函数
     //ceil函数后的_意味着你确实指的是这个函数，而不是恰巧忘记了给它送参数
     //类型(Double) => Double，即接收并返回Double函数
     //从技术上讲，_将ceil方法变成了函数。

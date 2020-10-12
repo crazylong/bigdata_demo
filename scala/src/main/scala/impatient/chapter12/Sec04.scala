@@ -40,4 +40,11 @@ class Sec04 {
     val f2 = (_: String).substring(_: Int, _: Int)
 
   }
+
+  @Test
+  def test04(): Unit ={
+    (0 to 9).map("*" * _).foreach(println)
+    (0 to 9).map("*" * _).foreach(println _)
+    (0 to 9).map("*" * _).foreach(println(_))
+  }
 }

@@ -12,6 +12,7 @@ object TrafficLightColor extends Enumeration {
   type TrafficLightColor = Value
   //现在枚举类型变成了 TrafficLightColor.TrafficLightColor，
   //但仅当你使用了import语句时这样做才显得有意义。
+  //import TrafficLightColor._
 
 
 

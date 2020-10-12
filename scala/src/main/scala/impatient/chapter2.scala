@@ -80,6 +80,9 @@ class chapter2 {
     println(n)
   }
 
+
+
+  //============================高级for循环======================
   /**
     * 多个生成器
     */
@@ -118,10 +121,10 @@ class chapter2 {
     */
   @Test
   def testFor9(): Unit ={
-    //val yields = for(i <- 1 to 10) yield i % 3
-    val yields = for(i <- 1 to 10) yield {
-      i % 3
-    }
+    val yields = for(i <- 1 to 10) yield i % 3
+//    val yields = for(i <- 1 to 10) yield {
+//      i % 3
+//    }
     println(yields)
     for(y <- yields)
       println(y)
@@ -165,6 +168,7 @@ class chapter2 {
 
 
   //region =========================函数=======================
+//除方法外scala还支持函数，方法对对象进行操作，而函数则不是
 
   /**
     * 根据等号右边表达式推断返回类型
@@ -276,12 +280,16 @@ class chapter2 {
     */
   @Test
   def testLazy(): Unit ={
-    /*val words1 = scala.io.Source.fromFile("F://words.txt").mkString
+    /*
+    //在word定义时取值
+    val words1 = scala.io.Source.fromFile("F://words.txt").mkString
     println(words1)
 
+    //在word使用时取值
     lazy val words2 = scala.io.Source.fromFile("F://words.txt").mkString
     println(words2)
 
+    //在调用时取值
     def words3 = scala.io.Source.fromFile("F://words.txt").mkString
     println(words3)*/
 
@@ -303,6 +311,7 @@ class chapter2 {
   /**
     * throw的表达式有特殊的类型Nothing。
     * 如果一个分支的类型是Nothing，那么if/else表达式的类型就是另一个分支的类型。
+   * 第一个分支类型是Double，第二个分支类型是Nothing，整个if/else分支类型是Double
     * @param x
     * @return
     */
@@ -385,6 +394,19 @@ class chapter2 {
       }
     }
   }
+
+
+//  import java.nio.file._
+//  @Test
+//  def testResource2(): Unit = {
+//
+//
+//
+//    for  (in<- resource(Files.newBufferedReader(inPath));
+//          out <- resource(Files.newBufferedWriter(outPath)))  {
+//
+//    }
+//  }
 
 
   /**

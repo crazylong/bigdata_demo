@@ -15,4 +15,6 @@ class Counter {
 
   def current() = value
   def current2 = value
+  //无参方法，可以写上圆括号，也可以不写
+  //建议对于改值器方法（即改变对象状态的方法）使用()，对于取值器方法（不会改变对象状态的方法）去掉()
 }

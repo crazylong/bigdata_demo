@@ -39,17 +39,20 @@ class Person {
     if (newValue > 3) privateSex = 1
   }
 
-  //如果字段是私有的，则getter和setter方法也是私有的
-  //如果字段是val， 则只有getter方法被生成
-  //如果你不需要任何getter或setter，可以将字段声明为private[this]
 
+  //如果字段是val， 则只有getter方法被生成
   //会生成一个私有的final字段和一个getter方法
   val school = ""
 
+  //如果字段是私有的，则getter和setter方法也是私有的
   private var score1 = 0
 
+
   //对象私有
+  //如果你不需要任何getter或setter，可以将字段声明为private[this]
   private[this] val score2 = 0
+
+  private val score3 = 0
 
   //方法可以访问该类的所有对象的私有字段
   def isLess(other: Person) = score1 < other.score1 //访问另一个对象的私有字段

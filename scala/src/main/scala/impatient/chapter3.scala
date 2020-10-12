@@ -21,6 +21,7 @@ class chapter3 {
 
   }
 
+  //变长数组
   import scala.collection.mutable.ArrayBuffer
   @Test
   def testArrayBuffer(): Unit ={

@@ -29,6 +29,13 @@ class chapter1 {
     BigInt("123456789")
 
     Array(1, 4, 9, 16)
+
+    //偶尔()表示法会跟另一个scala特性--隐式参数--相冲突
+    //"Bonjour".sorted(3)
+
+    //("Bonjour".sorted)(3)
+
+    "Bonjour".sorted.apply(3)
   }
 
   @Test

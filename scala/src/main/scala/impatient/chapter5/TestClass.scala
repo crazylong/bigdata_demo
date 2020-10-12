@@ -37,6 +37,14 @@ class TestClass {
   }
 
   @Test
+  def testPerson3():Unit={
+    var p = new Person
+    p.sex_(3)
+    //与书上描述不符，并不能采用fred.age=30的方式
+    //p.sex=3
+  }
+
+  @Test
   def testNetwork(): Unit ={
     val chatter = new Network
     val myFace = new Network

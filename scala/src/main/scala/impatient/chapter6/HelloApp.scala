@@ -10,7 +10,7 @@ package impatient.chapter6
 //  }
 //}
 
-//除了每次都提供自己的mian方法，你还可以扩展App特质，然后将程序代码放入构造器方法体内
+//除了每次都提供自己的main方法，你还可以扩展App特质，然后将程序代码放入构造器方法体内
 object HelloApp extends App{
   //如果需要命令行参数，可以通过args属性得到：
   if(args.length > 0)

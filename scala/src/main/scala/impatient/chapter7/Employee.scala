@@ -8,3 +8,11 @@ package impatient{
   }
 }
 
+package net {
+  package bigjava {
+    class Counter {
+
+    }
+  }
+}
+
