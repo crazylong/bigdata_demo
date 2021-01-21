@@ -21,10 +21,16 @@ class SqlDemo {
     import spark.implicits._
 
     df.select($"name", $"age" + 1).show()
+    //df.select("name", $"age" + 1).show() //要么都用$，要么都不用，不然编译错误
+    //df.select("name", "age" + 1).show()//表达式"age"+1必须使用 $"age" + 1
+    df.select("name").show()
+    df.select("name", "age").show()
 
     df.filter($"age" > 21).show()
 
     df.groupBy("age").count().show()
+
+    df.groupBy($"age").count().show()
 
     spark.stop()
   }
@@ -69,6 +75,7 @@ class SqlDemo {
 
     val primitiveDS = Seq(1, 2, 3).toDS()
     primitiveDS.map(_ + 1).collect().foreach(println(_))
+    primitiveDS.show()
 
     // DataFrames can be converted to a Dataset by providing a class.
     // Mapping will be done by name
@@ -80,7 +87,9 @@ class SqlDemo {
   }
 
   //Interoperating with RDDs
-  //Inferring the Schema Using Reflection
+  /**
+   * 1.Inferring the Schema Using Reflection
+   */
   @Test
   def test04(): Unit ={
     val spark = SparkUtil.getSparkSession
@@ -118,7 +127,7 @@ class SqlDemo {
   }
 
   /**
-   * Programmatically Specifying the Schema
+   * 2.Programmatically Specifying the Schema
    */
   @Test
   def test5(): Unit ={

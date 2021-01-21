@@ -1,7 +1,6 @@
 package com.coderlong.util;
 
 import org.junit.Test;
-import sun.plugin2.util.SystemUtil;
 
 import java.io.File;
 import java.io.IOException;

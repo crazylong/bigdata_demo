@@ -165,7 +165,7 @@ class DataSourceDemo {
   @Test
   def test13(): Unit ={
     val spark = SparkUtil.getSparkSession
-    spark.sql("set spark.sql.files.ignoreCorruptFiles=true")
+    //spark.sql("set spark.sql.files.ignoreCorruptFiles=true")
 
     //spark.sql("set spark.sql.files.ignoreMissingFiles=true")
     val testCorruptDF = spark.read.parquet(
@@ -191,6 +191,7 @@ class DataSourceDemo {
   @Test
   def test15(): Unit ={
     val spark = SparkUtil.getSparkSession
+    spark.sql("set spark.sql.files.ignoreCorruptFiles=true")
     val recursiveLoadedDF = spark.read.format("parquet")
       .option("recursiveFileLookup", "true")
       .load("src/main/resources/dir1/")
