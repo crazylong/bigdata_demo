@@ -1,0 +1,16 @@
+spring:
+  activiti:
+    database-schema-update: false
+    check-process-definitions: false
+    historyLevel: audit
+    db-history-used: true
+  datasource:
+    username: sc_qc
+    password: sc_qc
+    url: jdbc:oracle:thin:@192.168.239.8:1521:ora11g
+    driver-class-name: oracle.jdbc.OracleDriver
+#  datasource:
+#    username: bankobject
+#    password: hzmcbankobject
+#    url: jdbc:mysql://192.168.239.2:3306/east_lq?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+#    driver-class-name: com.mysql.jdbc.Driver

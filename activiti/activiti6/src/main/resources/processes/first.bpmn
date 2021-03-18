@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.activiti.org/testm1593169474198" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/testm1593169474198" id="m1593169474198" name="">
+  <process id="holidy" name="holidy_name" isExecutable="true" isClosed="false" processType="None">
+    <intermediateThrowEvent id="IntermediateThrowEvent_1" name="Intermediate Throw Event 1">
+      <compensateEventDefinition waitForCompletion="false" id="CompensateEventDefinition_1"/>
+    </intermediateThrowEvent>
+    <serviceTask id="ServiceTask_1" name="Service Task 1"/>
+    <startEvent id="_2" name="StartEvent"></startEvent>
+    <userTask id="_3" name="填写请假单" activiti:assignee="zhangsan"></userTask>
+    <userTask id="_4" name="审批" activiti:assignee="lisi"></userTask>
+    <endEvent id="_5" name="EndEvent"></endEvent>
+    <sequenceFlow id="_6" sourceRef="_2" targetRef="_3"></sequenceFlow>
+    <sequenceFlow id="_7" sourceRef="_3" targetRef="_4"></sequenceFlow>
+    <sequenceFlow id="_8" sourceRef="_4" targetRef="_5"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_holidy">
+    <bpmndi:BPMNPlane bpmnElement="holidy" id="BPMNPlane_holidy">
+      <bpmndi:BPMNShape bpmnElement="_2" id="BPMNShape__2">
+        <omgdc:Bounds height="35.0" width="35.0" x="260.0" y="65.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" id="BPMNShape__3">
+        <omgdc:Bounds height="55.0" width="85.0" x="235.0" y="180.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_4" id="BPMNShape__4">
+        <omgdc:Bounds height="55.0" width="85.0" x="235.0" y="300.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5" id="BPMNShape__5">
+        <omgdc:Bounds height="35.0" width="35.0" x="260.0" y="430.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="ServiceTask_1">
+        <omgdc:Bounds height="48.0" width="120.0" x="449.0" y="184.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="IntermediateThrowEvent_1">
+        <omgdc:Bounds height="48.0" width="48.0" x="395.0" y="260.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_6" id="BPMNEdge__6">
+        <omgdi:waypoint x="277.0" y="100.0"></omgdi:waypoint>
+        <omgdi:waypoint x="277.0" y="180.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7" id="BPMNEdge__7">
+        <omgdi:waypoint x="277.0" y="235.0"></omgdi:waypoint>
+        <omgdi:waypoint x="277.0" y="300.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_8" id="BPMNEdge__8">
+        <omgdi:waypoint x="277.0" y="355.0"></omgdi:waypoint>
+        <omgdi:waypoint x="277.0" y="430.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
