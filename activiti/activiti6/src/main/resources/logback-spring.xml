@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Logback configuration. See http://logback.qos.ch/manual/index.html -->
+<configuration scan="true" scanPeriod="10 seconds">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+<!--    <logger name="com.mashibing.activiti" level="debug"/>-->
+<!--    <logger name="org.activiti.engine.impl.persistence.entity" level="debug"/>-->
+</configuration>
