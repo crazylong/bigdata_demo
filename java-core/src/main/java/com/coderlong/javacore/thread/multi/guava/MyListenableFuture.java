@@ -19,10 +19,12 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * guava
  * @author Qiong.Long
  * @create 2021/5/25
  */
 public class MyListenableFuture {
+
 
     @Test
     public void test1(){
