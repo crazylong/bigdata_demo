@@ -64,7 +64,7 @@ public class CacheAspect {
 
         //日志打印：参数
         log.info("args={}", point.getArgs());
-        return null;
+        return point.proceed();
     }
 
 
