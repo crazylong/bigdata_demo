@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/aopController")
 public class AopController {
     @RequestMapping(value = "/Curry")
-    public void Curry(){
+    public String Curry(){
         System.out.println("库里上场打球了！！");
+        return "库里上场打球了！！";
     }
 
     @RequestMapping(value = "/Harden")
