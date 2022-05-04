@@ -13,7 +13,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>1.8</java.version>
         <!--<spark.version>2.2.0</spark.version>-->
-        <spark.version>2.2.0-cdh6.0.0</spark.version>
+        <spark.version>2.4.8</spark.version>
         <jedis.version>2.8.2</jedis.version>
     </properties>
 
